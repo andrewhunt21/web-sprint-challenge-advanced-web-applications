@@ -8,6 +8,8 @@ import Login from './Login';
 import View from './View';
 import Logout from './Logout';
 
+import PrivateRoute from './PrivateRoute';
+
 const App = () => {
   return (
     <AppContainer>
@@ -22,13 +24,9 @@ const App = () => {
           <Redirect to="/" />
         </Route>
 
-        <Route exact path="/view">
-          <View />
-        </Route>
+        <PrivateRoute exact path="/view" component={View} />
 
-        <Route exact path="/logout">
-          <Logout />
-        </Route>
+        <PrivateRoute exact path="/logout" component={Logout} />
           
       </RouteContainer>
     </AppContainer>
