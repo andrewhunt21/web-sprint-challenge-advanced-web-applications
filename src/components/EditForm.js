@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
@@ -14,12 +15,15 @@ const EditForm = (props)=> {
     const [article, setArticle]  = useState(initialArticle);
     const {handleEdit, handleEditCancel, editId} = props;
 
-    // const { id } = useParams();
+    const { push } = useHistory();
+
+    const { id } = useParams();
 
     useEffect(() => {
-        axiosWithAuth().get(`/articles/${editId}`)
+        axiosWithAuth().get(`/articles/${id}`)
             .then(resp => {
                 setArticle(resp.data)
+                // push(`/articles/${id}`)
             })
             .catch(err => {
                 console.error(err);
