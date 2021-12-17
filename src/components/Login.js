@@ -12,6 +12,8 @@ const Login = () => {
         password: ""
     });
 
+    const [error, setError] = useState(false);
+
     const handleChange = (e) => {
         setCred({
             ...cred,
@@ -27,7 +29,9 @@ const Login = () => {
                 push('/view')
             })
             .catch(err => {
-                console.error(err);
+                const { error } = err.response.data;
+                setError(error);
+                // localStorage.setItem("error", error);
             });
     }
     
@@ -45,6 +49,11 @@ const Login = () => {
 
                 <Button id="submit">Submit</Button>
             </FormGroup>
+
+            <div>
+                {error && <p id="error">{error}</p>}
+            </div>
+            
         </ModalContainer>
     </ComponentContainer>);
 }
